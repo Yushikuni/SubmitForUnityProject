@@ -20,14 +20,12 @@ public class MainManager : MonoBehaviour
     private bool m_Started = false;
     private int m_Points;
     private int m_MaxPoints;
-    
     private bool m_GameOver = false;
 
     
     // Start is called before the first frame update
     void Start()
     {
-        m_MaxPoints = PlayerPrefs.GetInt("BestScoreText", 0);
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -61,6 +59,12 @@ public class MainManager : MonoBehaviour
         }
         else if (m_GameOver)
         {
+            if(m_MaxPoints < m_Points)
+            {
+                //UI_InputWindow.Show();
+                m_MaxPoints = m_Points;
+                //scoreManager.AddScore(new Score(, m_Points));
+            }
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -75,15 +79,6 @@ public class MainManager : MonoBehaviour
         
     }
 
-    void UpdateScoreToMaxScore()
-    {
-        if (m_MaxPoints < m_Points)
-        {
-            m_MaxPoints = m_Points;
-            MaxScoreText.text = $"Best score: {m_MaxPoints}";
-            //PlayerPrefs.SetInt("BestScoreText", m_Points);
-        }
-    }
 
     public void GameOver()
     {
