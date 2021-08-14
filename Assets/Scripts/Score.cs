@@ -1,23 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using System;
 
-public class Score : MonoBehaviour
+[Serializable]
+public class Score
 {
-    //public Transform player;
-    public Text scoreText;
-    public int score;
+    public string name;
+    public float score;
 
-    // Update is called once per frame
-    void Update()
+    public Score(string name, float score)
     {
-        AddScore(score);
-    }
-
-    public void AddScore(int point)
-    {
-        score += point;
-        scoreText.text = "Score: " + score.ToString();
+        this.name = name;
+        this.score = score;
     }
 }
