@@ -2,43 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 public class UI_InputWindow : MonoBehaviour
 {
+    public InputField input;
+    public Button button;
 
-    public string namePlayer;
-    public string saveName;
-
-    public Text playerName;
-    public Text loadedName;
-
-    void Update()
+    private string helpInput;
+    void Start()
     {
-        namePlayer = PlayerPrefs.GetString("name", "none");
-        playerName.text = namePlayer;
+        input = null;
+        input = gameObject.GetComponent<InputField>();
+        //var se = new InputField.SubmitEvent();
+        /*se.AddListener(SubmitName);
+        input.onEndEdit = se;*/
+        Debug.Log("-_-");
 
-        Debug.Log("Jmeno hrace: " + playerName);
+        Debug.Log("Co je v inputu? " + input);
+
+        helpInput = "" + input;
+
+
+        button.onClick.AddListener(delegate { TaskWithParameters("nic"); });
+
+        //or simply use the line below, 
+        //input.onEndEdit.AddListener(SubmitName);  // This also works
+
     }
 
-    public void SetName()
+
+    void TaskWithParameters(string message)
     {
-        //saveName = inputText.text;
-        PlayerPrefs.SetString("name", saveName);
+        //Output this to console when the Button2 is clicked
+        Debug.Log(message);
     }
 
-    private void Awake()
+    void TaskOnClick()
     {
-        Hide();
+        //Output this to console when Button1 or Button3 is clicked
+        Debug.Log("You have clicked the button!");
     }
 
-    public void Show()
+    public string SubmitName(string arg0)
     {
-        gameObject.SetActive(true);
-    }
+        Debug.Log(arg0);
 
-    public void Hide()
-    {
-        gameObject.SetActive(false);
+        return arg0;
     }
 }

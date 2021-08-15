@@ -12,7 +12,7 @@ public class MainManager : MonoBehaviour
 
     /* Score text and max score*/
 
-
+    public ScoreManager scoreManager;
     public Text ScoreText;
     public Text MaxScoreText;
     public GameObject GameOverText;
@@ -59,12 +59,6 @@ public class MainManager : MonoBehaviour
         }
         else if (m_GameOver)
         {
-            if(m_MaxPoints < m_Points)
-            {
-                //UI_InputWindow.Show();
-                m_MaxPoints = m_Points;
-                //scoreManager.AddScore(new Score(, m_Points));
-            }
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -75,8 +69,7 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";   
-        
+        ScoreText.text = $"Score : {m_Points}";
     }
 
 
@@ -85,4 +78,18 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         GameOverText.SetActive(true);
     }
+
+    //custom update script
+
+    public void MaxScore()
+    {
+        if (m_MaxPoints < m_Points)
+        {
+            m_MaxPoints = m_Points;
+            Debug.Log("Max score: " + m_MaxPoints);
+            //show popup okno
+        }
+    }
+
+
 }
