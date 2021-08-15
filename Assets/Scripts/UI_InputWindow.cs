@@ -7,28 +7,24 @@ using UnityEngine.EventSystems;
 
 public class UI_InputWindow : MonoBehaviour
 {
+    protected UI_InputWindow ui;
     public InputField input;
     public Button button;
 
     private string helpInput;
+
     void Start()
     {
-        input = null;
         input = gameObject.GetComponent<InputField>();
-        //var se = new InputField.SubmitEvent();
-        /*se.AddListener(SubmitName);
-        input.onEndEdit = se;*/
+
+
         Debug.Log("-_-");
 
         Debug.Log("Co je v inputu? " + input);
 
-        helpInput = "" + input;
+        helpInput = "TEST123";//"" + input;
 
-
-        button.onClick.AddListener(delegate { TaskWithParameters("nic"); });
-
-        //or simply use the line below, 
-        //input.onEndEdit.AddListener(SubmitName);  // This also works
+        button.onClick.AddListener(delegate { TaskWithParameters(helpInput); });
 
     }
 
@@ -50,5 +46,10 @@ public class UI_InputWindow : MonoBehaviour
         Debug.Log(arg0);
 
         return arg0;
+    }
+
+    public void Show()
+    {
+        ui.Show();
     }
 }

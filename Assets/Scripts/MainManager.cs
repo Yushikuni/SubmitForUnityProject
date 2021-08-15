@@ -16,6 +16,8 @@ public class MainManager : MonoBehaviour
     public Text ScoreText;
     public Text MaxScoreText;
     public GameObject GameOverText;
+
+    public UI_InputWindow popup;
     
     private bool m_Started = false;
     private int m_Points;
@@ -59,6 +61,7 @@ public class MainManager : MonoBehaviour
         }
         else if (m_GameOver)
         {
+            MaxScore();
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -88,6 +91,9 @@ public class MainManager : MonoBehaviour
             m_MaxPoints = m_Points;
             Debug.Log("Max score: " + m_MaxPoints);
             //show popup okno
+
+            popup.Show();
+
         }
     }
 
