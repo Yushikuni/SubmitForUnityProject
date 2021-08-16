@@ -22,9 +22,11 @@ public class UI_InputWindow : MonoBehaviour
 
         Debug.Log("Co je v inputu? " + input);
 
-        helpInput = "TEST123";//"" + input;
+        //helpInput = "TEST123";//"" + input;
 
-        button.onClick.AddListener(delegate { TaskWithParameters(helpInput); });
+        //ReadStringInput(helpInput);
+
+        //button.onClick.AddListener(delegate { TaskWithParameters(helpInput); });
 
     }
 
@@ -51,5 +53,11 @@ public class UI_InputWindow : MonoBehaviour
     public void Show()
     {
         ui.Show();
+    }
+
+    public void ReadStringInput(string s)
+    {
+        helpInput = s;
+        Debug.Log(helpInput);
     }
 }
