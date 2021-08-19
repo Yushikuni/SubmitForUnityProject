@@ -4,30 +4,75 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-
+[RequireComponent(typeof(InputField))]
 public class UI_InputWindow : MonoBehaviour
 {
-    protected UI_InputWindow ui;
-    public InputField input;
-    public Button button;
+    public GameObject inputFieldObj; //Add this
+    const string playerNamePrefKey = "PlayerName";
 
-    private string helpInput;
+    string playerName = null;
+
 
     void Start()
     {
-        input = gameObject.GetComponent<InputField>();
-
-
         Debug.Log("-_-");
+        gameObject.GetComponent<InputField>().onEndEdit.AddListener(displayText);
 
-        Debug.Log("Co je v inputu? " + input);
+        string defaultName = string.Empty;
+        InputField _inputField = this.GetComponent<InputField>();
+        if (_inputField != null)
+        {
+            if (PlayerPrefs.HasKey(playerNamePrefKey))
+            {
+                defaultName = PlayerPrefs.GetString(playerNamePrefKey);
+                _inputField.text = defaultName;
+            }
+        }
+        playerName = defaultName;
+        //input = gameObject.GetComponent<InputField>();        
+
+        Debug.Log("Co je v playerName?? " + playerName);
 
         //helpInput = "TEST123";//"" + input;
 
         //ReadStringInput(helpInput);
+        //InputChanged(input);
 
-        //button.onClick.AddListener(delegate { TaskWithParameters(helpInput); });
+        //button.onClick.AddListener(delegate { TaskWithParameters(input.text); });
+        //ReadStringInput(input.text);
 
+    }
+    private void displayText(string textInField)
+    {
+        print(textInField);
+    }
+    public void submitName()
+    {
+        string name = GameObject.Find("InputField").GetComponent<InputField>().text;
+        print("Saving " + name);
+
+    }
+    /*
+    public void SetPlayerNickName()//Leave that empty)
+    {
+
+        InputField inputField = inputFieldObj.GetComponent<InputField>();
+        string value = inputField.text;
+        if (string.IsNullOrEmpty(value))
+        {
+            Debug.LogError("Player Name is empty");
+            return;
+        }
+        Debug.Log(PlayerPrefs.GetString(playerNamePrefKey));
+        PhotonNetwork.NickName = value;
+        PlayerPrefs.SetString(playerNamePrefKey, value);
+    }*/
+    /*
+    public void InputChanged(InputField _input)
+    {
+        string value = _input.text;
+        //Do code with 'value' here.
+        Debug.Log(value);
     }
 
 
@@ -59,5 +104,5 @@ public class UI_InputWindow : MonoBehaviour
     {
         helpInput = s;
         Debug.Log(helpInput);
-    }
+    }*/
 }

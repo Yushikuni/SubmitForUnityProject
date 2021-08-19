@@ -92,7 +92,7 @@ public class MainManager : MonoBehaviour
             Debug.Log("Max score: " + m_MaxPoints);
             //show popup okno
 
-            popup.Show();
+            //popup.Show();
 
         }
     }
