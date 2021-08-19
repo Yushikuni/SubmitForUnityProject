@@ -12,19 +12,22 @@ public class MainManager : MonoBehaviour
 
     /* Score text and max score*/
 
-    public ScoreManager scoreManager;
     public Text ScoreText;
     public Text MaxScoreText;
     public GameObject GameOverText;
 
-    public UI_InputWindow popup;
-    
+
     private bool m_Started = false;
     private int m_Points;
-    private int m_MaxPoints;
     private bool m_GameOver = false;
 
-    
+    //custom start
+    public UI_InputWindow popup;
+    string name;
+    int m_MaxPoints;
+    Score score;
+    //custom end
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +64,7 @@ public class MainManager : MonoBehaviour
         }
         else if (m_GameOver)
         {
+            //call custom method
             MaxScore();
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -80,20 +84,22 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        //MaxScoreText.SetActive(true);
+        MaxScoreText.text = $"Max Score: { m_MaxPoints}";
     }
 
-    //custom update script
+    //custom method max score
 
     public void MaxScore()
     {
         if (m_MaxPoints < m_Points)
         {
             m_MaxPoints = m_Points;
-            Debug.Log("Max score: " + m_MaxPoints);
+            Debug.Log("Max score: " + m_MaxPoints); //player score
             //show popup okno
-
-            //popup.Show();
-
+            popup.Show();
+            name = popup.playerNameDefault; //player name
+            score = new Score(name, m_MaxPoints);
         }
     }
 
