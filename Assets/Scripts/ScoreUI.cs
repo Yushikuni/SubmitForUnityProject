@@ -12,7 +12,7 @@ public class ScoreUI : MonoBehaviour
     {
         //zapsani uzivatele
         var scores = scoreManager.GetHighScores().ToArray();
-        for (int i = 0; i < scores.Length; i++)
+        for (int i = 0; i < 5 ; i++)
         {
             var row = Instantiate(rowUi, transform).GetComponent<RowUi>();
             row.rank.text = "# " + (i + 1).ToString();

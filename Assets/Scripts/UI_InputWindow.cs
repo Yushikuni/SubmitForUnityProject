@@ -11,7 +11,8 @@ public class UI_InputWindow : MonoBehaviour
     public GameObject inputFieldObj; //Add this
     const string playerNamePrefKey = "PlayerName";
 
-    public string playerNameDefault = "PlayerName";
+    public string playerNameDefault = "Player name";
+    public Text PlayerName;
 
 
     void Start()
@@ -28,14 +29,19 @@ public class UI_InputWindow : MonoBehaviour
 
     public void SubmitName()
     {
-        playerNameDefault = GameObject.Find("InputField").GetComponent<InputField>().text;
-        print("Saving " + playerNameDefault);
-        inputFieldObj.SetActive(false);
+        PlayerName.text = GameObject.Find("InputField").GetComponent<InputField>().text;
+        print("Saving " + PlayerName.text);
+        Hide();
     }
 
     public void Show()
     {
         inputFieldObj.SetActive(true);
         print("oteveno POP-UP okno!!!");
+    }
+
+    public void Hide()
+    {
+        inputFieldObj.SetActive(false);
     }
 }

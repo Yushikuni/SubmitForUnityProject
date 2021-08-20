@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class ScoreData
 {
     public List<Score> scores;
+    //public List<Score> names;
 
     public ScoreData()
     {

@@ -23,14 +23,16 @@ public class MainManager : MonoBehaviour
 
     //custom start
     public UI_InputWindow popup;
-    string name;
+    string namePlayer;
     int m_MaxPoints;
     Score score;
+    public ScoreManager scoreManager;
     //custom end
 
     // Start is called before the first frame update
     void Start()
     {
+        //MaxScoreText.text = $"Name:{namePlayer} Max Score: { m_MaxPoints} ";
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -49,6 +51,7 @@ public class MainManager : MonoBehaviour
 
     private void Update()
     {
+        MaxScoreText.text = $"Name:{namePlayer} Max Score: { m_MaxPoints} ";
         if (!m_Started)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -85,7 +88,7 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         GameOverText.SetActive(true);
         //MaxScoreText.SetActive(true);
-        MaxScoreText.text = $"Max Score: { m_MaxPoints}";
+        MaxScoreText.text = $"Name:{namePlayer} Max Score: { m_MaxPoints} ";
     }
 
     //custom method max score
@@ -98,8 +101,12 @@ public class MainManager : MonoBehaviour
             Debug.Log("Max score: " + m_MaxPoints); //player score
             //show popup okno
             popup.Show();
-            name = popup.playerNameDefault; //player name
-            score = new Score(name, m_MaxPoints);
+            namePlayer = popup.PlayerName.text; //player name
+            Debug.Log("Player name from main manager: " +namePlayer);
+            score = new Score(namePlayer, m_MaxPoints);
+            scoreManager.SaveScore();
+            
+
         }
     }
 
